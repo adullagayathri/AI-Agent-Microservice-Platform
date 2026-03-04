@@ -1,1 +1,96 @@
 # AI-Agent-Microservice-Platform
+
+**Cloud-Native Distributed Runtime for Autonomous AI Agents**
+
+---
+
+## Overview
+The **AI Agent Microservice Platform** is a containerized, distributed system designed to orchestrate autonomous AI agents at scale.  
+Built with **FastAPI, Docker, and Redis**, this platform simulates concurrent agent execution, incorporates health monitoring, retry logic, and structured logging, and enables reproducible multi-agent experiments.
+
+This project demonstrates **cloud-native architecture, distributed orchestration, and scalable AI agent management**, aligned with modern Core AI engineering practices.
+
+---
+
+## Features
+
+- Runtime orchestration of multiple autonomous AI agents  
+- Simulates **50+ concurrent agents**  
+- Centralized **health checks and retry logic**  
+- Structured logging for reproducible evaluation  
+- Containerized microservices for **scalable deployment**  
+- Modular design supporting **multi-agent pipelines**
+
+---
+
+## Architecture
+
+```
++----------------------+ +----------------------+
+| Orchestrator |<----->| Redis Queue |
+| - Scheduler | +----------------------+
+| - Health Monitor | ^
+| - Logger | |
++----------------------+ |
+| |
+v |
++----------------------+ +----------------------+
+| Agent Service 1 | | Agent Service N |
+| - Task Handler | | - Task Handler |
++----------------------+ +----------------------+
+```
+
+- **Orchestrator:** Coordinates agent execution, scheduling, health checks, and logging  
+- **Agents:** Independent microservices simulating AI tasks  
+- **Redis:** Message queue for communication and task dispatch  
+
+---
+
+## Tech Stack
+
+- **Backend / Orchestrator:** FastAPI, Python  
+- **Microservices & Concurrency:** asyncio, threading  
+- **Queue / Messaging:** Redis  
+- **Containerization:** Docker, Docker Compose  
+- **Logging / Monitoring:** JSON structured logging  
+- **Simulation:** Concurrent execution of multiple agents  
+
+---
+
+## Installation
+
+1. Clone the repository:  
+```bash
+git clone https://github.com/<gayathriadulla>/AI-Agent-Microservice-Platform.git
+cd AI-Agent-Microservice-Platform
+```
+
+2. Start the platform using Docker Compose:
+```bash
+docker-compose up --build
+```
+3. Access orchestrator API:
+```bash
+http://localhost:8000/status
+```
+## Usage
+
+Start orchestrator: orchestrator/main.py
+
+Run agent workers: agents/agent_worker.py
+
+Monitor logs in logs/ or via API endpoints
+
+Simulate 50+ agents concurrently using the included simulation.py script
+
+## Demo
+
+Simulates 50+ concurrent agents performing tasks
+
+Health monitoring reports real-time agent status
+
+Centralized structured logs stored for reproducible experiments
+
+## Contributing
+
+This project is intended as a demonstration of cloud-native distributed AI agent systems. Contributions for improved scalability, additional agent types, and advanced orchestration are welcome.
