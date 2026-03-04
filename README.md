@@ -22,7 +22,22 @@ This project demonstrates **cloud-native architecture, distributed orchestration
 - Modular design supporting **multi-agent pipelines**
 
 ---
-
+## Project Structure
+```
+AI-Agent-Microservice-Platform/
+├── orchestrator/
+│   ├── main.py          # Orchestrator entrypoint
+│   ├── scheduler.py     # Task scheduling logic
+│   ├── health_monitor.py# Agent health checks
+│   └── logger.py        # Structured logging
+├── agents/
+│   ├── agent_worker.py  # Agent microservice logic
+│   └── tasks.py         # Example AI tasks agents can perform
+├── simulation.py        # Script to simulate 50+ agents concurrently
+├── docker-compose.yml   # Multi-container orchestration
+├── Dockerfile           # Base Dockerfile for services
+└── README.md            # Your Markdown
+```
 ## Architecture
 
 ```
