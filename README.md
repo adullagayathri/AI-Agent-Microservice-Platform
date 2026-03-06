@@ -41,23 +41,23 @@ AI-Agent-Microservice-Platform/
 ## Architecture
 
 ```
-+----------------------+ +----------------------+
-| Orchestrator |<----->| Redis Queue |
-| - Scheduler | +----------------------+
-| - Health Monitor | ^
-| - Logger | |
-+----------------------+ |
-| |
-v |
-+----------------------+ +----------------------+
-| Agent Service 1 | | Agent Service N |
-| - Task Handler | | - Task Handler |
-+----------------------+ +----------------------+
++----------------------+       +----------------------+
+|     Orchestrator     |<----->|      Redis Queue     |
+|  - Scheduler         |       +----------------------+
+|  - Health Monitor    |                 ^
+|  - Logger            |                 |
++----------------------+                 |
+             |                            |
+             v                            |
++----------------------+       +----------------------+
+|    Agent Service 1   |       |    Agent Service N   |
+|    - Task Handler    |       |    - Task Handler    |
++----------------------+       +----------------------+
 ```
 
-- **Orchestrator:** Coordinates agent execution, scheduling, health checks, and logging  
-- **Agents:** Independent microservices simulating AI tasks  
-- **Redis:** Message queue for communication and task dispatch  
+**Orchestrator**: Coordinates agent execution, scheduling, health checks, and logging  
+**Agents**: Independent microservices simulating AI tasks  
+**Redis**: Message queue for communication and task dispatch 
 
 ---
 
@@ -71,6 +71,12 @@ v |
 - **Simulation:** Concurrent execution of multiple agents  
 
 ---
+## Requirements
+
+- Python 3.10+
+- Docker
+- Docker Compose
+- Redis
 
 ## Installation
 
@@ -82,7 +88,7 @@ cd AI-Agent-Microservice-Platform
 
 2. Start the platform using Docker Compose:
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 3. Access orchestrator API:
 ```bash
@@ -98,6 +104,44 @@ Monitor logs in logs/ or via API endpoints
 
 Simulate 50+ agents concurrently using the included simulation.py script
 
+## Example Output
+
+Running the simulation script generates concurrent agent tasks:
+
+```
+python simulation.py
+```
+
+Output:
+
+```
+Task sent
+Task sent
+Task sent
+Task sent
+Task sent
+```
+
+Agent worker logs:
+
+```
+Agent received task
+Processing task...
+Task completed
+```
+
+API health check:
+
+```
+GET /status
+
+{
+  "system": "running",
+  "redis": "connected",
+  "agents": "active"
+}
+```
+
 ## Demo
 
 Simulates 50+ concurrent agents performing tasks
@@ -109,3 +153,12 @@ Centralized structured logs stored for reproducible experiments
 ## Contributing
 
 This project is intended as a demonstration of cloud-native distributed AI agent systems. Contributions for improved scalability, additional agent types, and advanced orchestration are welcome.
+## Future Improvements
+
+- Distributed agent scaling using Kubernetes
+- Agent priority scheduling
+- Prometheus + Grafana monitoring
+- Integration with real AI models (LLMs, computer vision pipelines)
+- Multi-agent collaboration workflows
+
+
